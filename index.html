@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Document Filing & Tracking System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Digital Document Filing & Tracking System</h1>
+            <div class="user-info">
+                <span id="currentUser">Admin User</span>
+                <button onclick="logout()">Logout</button>
+            </div>
+        </header>
+
+        <nav class="main-nav">
+            <button class="nav-btn active" onclick="showSection('dashboard')">Dashboard</button>
+            <button class="nav-btn" onclick="showSection('create')">Create Document</button>
+            <button class="nav-btn" onclick="showSection('search')">Search & History</button>
+        </nav>
+
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="section active">
+            <div class="dashboard-grid">
+                <div class="stats-card">
+                    <h3>Total Documents</h3>
+                    <div class="stat-number" id="totalDocs">0</div>
+                </div>
+                <div class="stats-card">
+                    <h3>Pending Approvals</h3>
+                    <div class="stat-number" id="pendingDocs">0</div>
+                </div>
+                <div class="stats-card">
+                    <h3>This Month</h3>
+                    <div class="stat-number" id="monthlyDocs">0</div>
+                </div>
+            </div>
+
+            <div class="quick-actions">
+                <h3>Quick Actions</h3>
+                <div class="action-buttons">
+                    <button class="action-btn" onclick="createDocument('gate-pass')">
+                        <span>📋</span>Gate Pass
+                    </button>
+                    <button class="action-btn" onclick="createDocument('job-card')">
+                        <span>🔧</span>Job Card
+                    </button>
+                    <button class="action-btn" onclick="createDocument('invoice')">
+                        <span>💰</span>Invoice
+                    </button>
+                    <button class="action-btn" onclick="createDocument('asset-movement')">
+                        <span>📦</span>Asset Movement
+                    </button>
+                </div>
+            </div>
+
+            <div class="recent-activity">
+                <h3>Recent Activity</h3>
+                <div id="recentList" class="activity-list"></div>
+            </div>
+        </section>
+
+        <!-- Create Document Section -->
+        <section id="create" class="section">
+            <div class="form-container">
+                <h2>Create New Document</h2>
+                
+                <div class="form-group">
+                    <label for="docType">Document Type</label>
+                    <select id="docType" onchange="updateFormFields()">
+                        <option value="">Select Document Type</option>
+                        <option value="gate-pass">Gate Pass</option>
+                        <option value="job-card">Job Card</option>
+                        <option value="invoice">Invoice</option>
+                        <option value="asset-movement">Asset Movement</option>
+                        <option value="score-card">Score Card</option>
+                    </select>
+                </div>
+
+                <form id="documentForm">
+                    <!-- Common Fields -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="docId">Document ID</label>
+                            <input type="text" id="docId" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="docDate">Date</label>
+                            <input type="date" id="docDate" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="personName">Person/Department Name</label>
+                            <input type="text" id="personName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="authorizedBy">Authorized By</label>
+                            <input type="text" id="authorizedBy" required>
+                        </div>
+                    </div>
+
+                    <!-- Dynamic Fields Container -->
+                    <div id="dynamicFields"></div>
+
+                    <div class="form-group">
+                        <label for="status">Status</label>
+                        <select id="status">
+                            <option value="pending">Pending</option>
+                            <option value="approved">Approved</option>
+                            <option value="completed">Completed</option>
+                            <option value="returned">Returned</option>
+                        </select>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" onclick="saveDocument()">Save Document</button>
+                        <button type="button" onclick="clearForm()">Clear Form</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Search Section -->
+        <section id="search" class="section">
+            <div class="search-container">
+                <h2>Search & History</h2>
+                
+                <div class="search-filters">
+                    <div class="filter-row">
+                        <div class="form-group">
+                            <label for="searchName">Name</label>
+                            <input type="text" id="searchName" placeholder="Enter name...">
+                        </div>
+                        <div class="form-group">
+                            <label for="searchType">Document Type</label>
+                            <select id="searchType">
+                                <option value="">All Types</option>
+                                <option value="gate-pass">Gate Pass</option>
+                                <option value="job-card">Job Card</option>
+                                <option value="invoice">Invoice</option>
+                                <option value="asset-movement">Asset Movement</option>
+                                <option value="score-card">Score Card</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-row">
+                        <div class="form-group">
+                            <label for="searchDateFrom">From Date</label>
+                            <input type="date" id="searchDateFrom">
+                        </div>
+                        <div class="form-group">
+                            <label for="searchDateTo">To Date</label>
+                            <input type="date" id="searchDateTo">
+                        </div>
+                        <div class="form-group">
+                            <label for="searchStatus">Status</label>
+                            <select id="searchStatus">
+                                <option value="">All Status</option>
+                                <option value="pending">Pending</option>
+                                <option value="approved">Approved</option>
+                                <option value="completed">Completed</option>
+                                <option value="returned">Returned</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="search-actions">
+                        <button onclick="searchDocuments()">Search</button>
+                        <button onclick="clearSearch()">Clear</button>
+                    </div>
+                </div>
+
+                <div class="search-results">
+                    <div class="results-header">
+                        <h3>Search Results</h3>
+                        <span id="resultsCount">0 documents found</span>
+                    </div>
+                    <div id="searchResults" class="results-list"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Document Detail Modal -->
+        <div id="documentModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <div id="documentDetails"></div>
+                <div class="modal-actions">
+                    <button onclick="editDocument()">Edit</button>
+                    <button onclick="printDocument()">Print</button>
+                    <button onclick="exportPDF()">Export PDF</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+{
+  "documents": [
+    {
+      "id": "1",
+      "docId": "GATEPASS24010001",
+      "type": "gate-pass",
+      "date": "2024-01-15",
+      "personName": "John Doe",
+      "authorizedBy": "Manager Smith",
+      "status": "approved",
+      "assetType": "Laptop",
+      "assetTag": "LT001234",
+      "exitDate": "2024-01-15",
+      "returnDate": "2024-01-20",
+      "purpose": "Work from home setup",
+      "createdAt": "2024-01-15T10:00:00Z",
+      "updatedAt": "2024-01-15T10:00:00Z"
+    },
+    {
+      "id": "2",
+      "docId": "JOBCARD24010001",
+      "type": "job-card",
+      "date": "2024-01-16",
+      "personName": "IT Department",
+      "authorizedBy": "CTO Johnson",
+      "status": "pending",
+      "jobTitle": "Server Maintenance",
+      "priority": "High",
+      "assignedTo": "Tech Team",
+      "dueDate": "2024-01-25",
+      "description": "Monthly server maintenance and updates",
+      "createdAt": "2024-01-16T09:00:00Z",
+      "updatedAt": "2024-01-16T09:00:00Z"
+    },
+    {
+      "id": "3",
+      "docId": "INVOICE24010001",
+      "type": "invoice",
+      "date": "2024-01-17",
+      "personName": "Finance Department",
+      "authorizedBy": "CFO Williams",
+      "status": "completed",
+      "invoiceNumber": "INV-2024-001",
+      "clientName": "ABC Corporation",
+      "amount": "5000",
+      "dueDate": "2024-02-17",
+      "description": "Consulting services for Q1 2024",
+      "createdAt": "2024-01-17T14:30:00Z",
+      "updatedAt": "2024-01-17T14:30:00Z"
+    },
+    {
+      "id": "4",
+      "docId": "ASSETMOVEMENT24010001",
+      "type": "asset-movement",
+      "date": "2024-01-18",
+      "personName": "Operations Team",
+      "authorizedBy": "Operations Manager",
+      "status": "approved",
+      "assetName": "Conference Room Projector",
+      "fromLocation": "Conference Room A",
+      "toLocation": "Conference Room B",
+      "movementDate": "2024-01-20",
+      "reason": "Room renovation in Conference Room A",
+      "createdAt": "2024-01-18T11:15:00Z",
+      "updatedAt": "2024-01-18T11:15:00Z"
+    },
+    {
+      "id": "5",
+      "docId": "SCORECARD24010001",
+      "type": "score-card",
+      "date": "2024-01-19",
+      "personName": "HR Department",
+      "authorizedBy": "HR Director",
+      "status": "completed",
+      "employeeName": "Jane Smith",
+      "period": "Q4 2023",
+      "score": "85",
+      "reviewer": "Team Lead Brown",
+      "comments": "Excellent performance with room for improvement in project management",
+      "createdAt": "2024-01-19T16:45:00Z",
+      "updatedAt": "2024-01-19T16:45:00Z"
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "username": "admin",
+      "name": "System Administrator",
+      "role": "admin",
+      "department": "IT"
+    },
+    {
+      "id": "2",
+      "username": "staff",
+      "name": "Staff User",
+      "role": "staff",
+      "department": "General"
+    }
+  ],
+  "settings": {
+    "companyName": "Your Organization",
+    "documentIdPrefix": {
+      "gate-pass": "GP",
+      "job-card": "JC",
+      "invoice": "INV",
+      "asset-movement": "AM",
+      "score-card": "SC"
+    },
+    "defaultStatus": "pending",
+    "autoApprovalRoles": ["admin", "manager"]
+  }
+}
