@@ -2,7 +2,7 @@
   "name": "digital-document-filing-system",
   "version": "1.0.0",
   "description": "A modern digital document filing and tracking system for organizations",
-  "main": "server.js",
+
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
